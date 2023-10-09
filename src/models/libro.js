@@ -20,7 +20,7 @@ const Libro = new Schema({
     },
     portrait: {
         type: String,
-        required: false
+        required: true
     }
 }, {
     timestamps: true
