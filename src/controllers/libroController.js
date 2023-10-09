@@ -24,7 +24,7 @@ export const ctrlCreateNewLibro = async (req, res) => {
             autor: `${autorId.name} ${autorId.lastName}`,
             genero,
             year,
-            portrait: portrait.name
+            portrait: `./src/images/${portrait.name}`
         });
 
         await newLibro.save();
