@@ -17,6 +17,10 @@ const Libro = new Schema({
     year: {
         type: Number,
         required: true
+    },
+    caratula: {
+        type: String,
+        required: false
     }
 }, {
     timestamps: true

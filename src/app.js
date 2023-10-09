@@ -6,8 +6,8 @@ import morgan from 'morgan';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import path from 'node:path'
-import { libroRouter } from './routes/libros.js';
-import { autorRouter } from './routes/autores.js';
+import { libroRouter } from './routes/libros.routes.js';
+import { autorRouter } from './routes/autores.routes.js';
 import { indexRoute } from './routes/index.routes.js';
 
 const app = express();

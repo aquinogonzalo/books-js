@@ -12,7 +12,7 @@ const Autor = new Schema({
     bibliografia: {
         type: String,
         required: true
-    }       
+    }
 }, {
     timestamps: true
 });
