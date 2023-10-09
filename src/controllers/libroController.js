@@ -3,30 +3,41 @@ import { AutorModel } from '../models/autor.js';
 
 // crear libro
 export const ctrlCreateNewLibro = async (req, res) => {
-    const { titulo, autor, genero, year } = req.body
+    const { titulo, autor, genero, year } = req.body;
+    const autorId = await AutorModel.findById(autor);
+    const portrait = req.files.portrait
+    console.log(portrait)
 
-    const autorId = await AutorModel.findById(autor)
-
+    portrait.mv(
+        `./src/images/${portrait.name}`,
+        (err) => {
+            console.log(err)
+        }
+    )
     if (!autorId) {
-        return res.status(404).json({ message: 'Autor no encontrado' })
+        return res.status(404).json({ message: 'Autor no encontrado' });
     }
 
     try {
         const newLibro = new LibroModel({
             titulo,
-            autor: autorId,
+            autor: `${autorId.name} ${autorId.lastName}`,
             genero,
-            year
-        })
+            year,
+            portrait: portrait.name
+        });
 
-        await newLibro.save()
+        await newLibro.save();
 
-        res.status(201).json({ message: 'Libro creado correctamente', newLibro })
+
+        res.status(201).json({
+            message: 'Libro creado correctamente', newLibro
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Error al crear el libro' })
+        res.status(500).json({ message: 'Error al crear el libro' });
     }
-}
+};
 
 // obtener todos los libros
 export const ctrlGetAllLibros = async (req, res) => {

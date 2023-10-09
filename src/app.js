@@ -17,10 +17,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
     fileUpload({
-        createParentPath: true,
-        limits: { fileSize: 20 * 1024 * 1024 },
-        abortOnLimit: true,
-        responseOnLimit: "Archivo muy grande",
+        useTempFiles: true,
+        uriDecodeFileNames: true,
+        tempFileDir: path.join(process.cwd(), './src/images/'),
+        limits: { fileSize: 50 * 1024 * 1024 },
+        responseOnLimit: "El archivo es demasiado grande",
+        //colocar nombre original
+
     })
 );
 app.use(morgan("tiny"));

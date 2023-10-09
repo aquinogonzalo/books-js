@@ -18,7 +18,7 @@ const Libro = new Schema({
         type: Number,
         required: true
     },
-    caratula: {
+    portrait: {
         type: String,
         required: false
     }
