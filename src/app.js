@@ -3,10 +3,12 @@ import 'dotenv/config';
 import { connectToMongo } from './config/database.js';
 import fileUpload from 'express-fileupload';
 import morgan from 'morgan';
-import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import path from 'node:path'
 import { libroRouter } from './routes/libros.js';
 import { autorRouter } from './routes/autores.js';
-
+import { indexRoute } from './routes/index.routes.js';
 
 const app = express();
 
@@ -24,14 +26,15 @@ app.use(
 app.use(morgan("tiny"));
 
 // Settings
-// app.set("view engine", "ejs");
-// app.set("views", path.join(__dirname, "views"));
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Routes
 app.use('/libros', libroRouter);
 app.use('/autores', autorRouter);
-
+app.use(indexRoute);
 
 // Servidor
 app.listen(process.env.PORT, () => {
