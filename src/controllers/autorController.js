@@ -66,3 +66,16 @@ export const ctrlDeleteAutor = async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar el autor' });
     }
 };
+
+// traer por libros por genero
+export const ctrlGetLibrosByGenero = async (req, res) => {
+    const genero = req.params.genero
+    try {
+        const libros = await LibroModel.find({ genero })
+        res.status(200).json(libros)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error al obtener los libros' })
+    }
+}

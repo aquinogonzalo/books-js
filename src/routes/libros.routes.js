@@ -2,9 +2,10 @@ import { Router } from 'express'
 import {
     ctrlGetAllLibros,
     ctrlGetLibroById,
+    ctrlGetLibrosByGenero,
     ctrlDeleteLibro,
     ctrlUpdateLibro,
-    ctrlCreateNewLibro
+    ctrlCreateNewLibro,
 } from '../controllers/libroController.js'
 
 const libroRouter = Router()
@@ -23,5 +24,9 @@ libroRouter.put('/:id', ctrlUpdateLibro);
 
 // eliminar un libro
 libroRouter.delete('/:id', ctrlDeleteLibro);
+
+// ver libros por genero
+libroRouter.get('/genero/:genero', ctrlGetLibrosByGenero);
+
 
 export { libroRouter };
